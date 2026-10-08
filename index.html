@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff8fbd">
+    <title>Вишлист Элеоноры</title>
+
+    <style>
+        :root {
+            --pink: #ff70aa;
+            --dark-pink: #d94d8a;
+            --light-pink: #ffe3ef;
+            --text: #542d47;
+            --white: #ffffff;
+            --shadow: 0 14px 35px rgba(188, 73, 132, 0.16);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: var(--text);
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(circle at 15% 10%, #fff4ae 0 4%, transparent 16%),
+                radial-gradient(circle at 90% 20%, #e7d5ff 0 6%, transparent 18%),
+                linear-gradient(135deg, #fff7fa, #ffe2ef 48%, #f3e9ff);
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        .hero {
+            padding: 65px 20px 45px;
+            text-align: center;
+        }
+
+        .label {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 9px 16px;
+            color: var(--dark-pink);
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #f4c7da;
+            border-radius: 999px;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            margin: 0;
+            color: var(--dark-pink);
+            font-size: clamp(42px, 8vw, 80px);
+            line-height: 1;
+            letter-spacing: -3px;
+            text-shadow: 0 4px 0 #ffffff;
+        }
+
+        .hero-text {
+            max-width: 650px;
+            margin: 24px auto 0;
+            font-size: clamp(17px, 2vw, 21px);
+            line-height: 1.6;
+        }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(70px, 120px));
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .time-box {
+            padding: 15px 8px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .time-number {
+            display: block;
+            color: var(--dark-pink);
+            font-size: clamp(25px, 5vw, 35px);
+            font-weight: 900;
+        }
+
+        .time-label {
+            font-size: 12px;
+            font-weight: 700;
+            opacity: 0.75;
+        }
+
+        main {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+            padding-bottom: 70px;
+        }
+
+        .database-status {
+            margin-bottom: 16px;
+            padding: 12px 16px;
+            color: #725d6a;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #f2cadc;
+            border-radius: 16px;
+        }
+
+        .database-status.connected {
+            color: #266c46;
+            background: #e9fff2;
+            border-color: #bde8cf;
+        }
+
+        .database-status.error {
+            color: #9a3346;
+            background: #fff0f2;
+            border-color: #f0bec7;
+        }
+
+        .toolbar {
+            position: sticky;
+            top: 12px;
+            z-index: 10;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.82);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(15px);
+        }
+
+        .search,
+        .category-select {
+            min-height: 49px;
+            color: var(--text);
+            background: #ffffff;
+            border: 1px solid #efc7d9;
+            border-radius: 15px;
+            outline: none;
+        }
+
+        .search {
+            width: 100%;
+            padding: 0 17px;
+        }
+
+        .category-select {
+            padding: 0 15px;
+            cursor: pointer;
+        }
+
+        .search:focus,
+        .category-select:focus {
+            border-color: var(--pink);
+            box-shadow: 0 0 0 4px rgba(255, 112, 170, 0.13);
+        }
+
+        .summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 0 3px 18px;
+        }
+
+        .summary h2 {
+            margin: 0;
+            font-size: clamp(25px, 4vw, 35px);
+        }
+
+        .counter {
+            color: var(--dark-pink);
+            font-weight: 800;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 22px 44px rgba(188, 73, 132, 0.23);
+        }
+
+        .card.reserved-by-other {
+            opacity: 0.72;
+        }
+
+        .visual {
+            position: relative;
+            display: grid;
+            min-height: 190px;
+            place-items: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--card-a), var(--card-b));
+        }
+
+        .visual::before,
+        .visual::after {
+            position: absolute;
+            content: "";
+            width: 135px;
+            height: 135px;
+            background: rgba(255, 255, 255, 0.22);
+            border-radius: 50%;
+        }
+
+        .visual::before {
+            top: -55px;
+            right: -35px;
+        }
+
+        .visual::after {
+            bottom: -70px;
+            left: -30px;
+        }
+
+        .emoji {
+            position: relative;
+            z-index: 1;
+            font-size: 78px;
+            filter: drop-shadow(0 10px 8px rgba(86, 38, 69, 0.16));
+        }
+
+        .badge {
+            position: absolute;
+            z-index: 2;
+            top: 13px;
+            padding: 7px 11px;
+            font-size: 12px;
+            font-weight: 800;
+            border-radius: 999px;
+        }
+
+        .category-badge {
+            left: 13px;
+            background: rgba(255, 255, 255, 0.88);
+        }
+
+        .reserved-badge {
+            right: 13px;
+            color: #ffffff;
+            background: var(--dark-pink);
+        }
+
+        .card-content {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 19px;
+            line-height: 1.35;
+        }
+
+        .card-note {
+            margin: 10px 0 20px;
+            color: #816175;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 9px;
+            margin-top: auto;
+        }
+
+        .button {
+            display: inline-flex;
+            min-height: 45px;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 12px;
+            border: 0;
+            border-radius: 14px;
+            font-weight: 800;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .shop-button {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--pink), var(--dark-pink));
+        }
+
+        .reserve-button {
+            color: var(--dark-pink);
+            background: var(--light-pink);
+        }
+
+        .reserve-button:disabled {
+            color: #796873;
+            background: #eee9ec;
+            cursor: not-allowed;
+        }
+
+        .empty {
+            display: none;
+            padding: 55px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 28px;
+        }
+
+        footer {
+            padding: 20px 20px 45px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        footer strong {
+            color: var(--dark-pink);
+        }
+
+        .toast {
+            position: fixed;
+            z-index: 100;
+            right: 20px;
+            bottom: 20px;
+            max-width: calc(100% - 40px);
+            padding: 14px 18px;
+            color: #ffffff;
+            font-weight: 800;
+            background: #653b58;
+            border-radius: 16px;
+            box-shadow: 0 16px 35px rgba(66, 28, 52, 0.28);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+            transition: 0.25s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 620px) {
+            .hero {
+                padding-top: 45px;
+            }
+
+            .countdown {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 7px;
+            }
+
+            .time-box {
+                padding: 12px 3px;
+                border-radius: 16px;
+            }
+
+            .toolbar {
+                position: static;
+                grid-template-columns: 1fr;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .visual {
+                min-height: 175px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="hero">
+        <div class="label">Birthday wishlist</div>
+
+        <h1>Вишлист Элеоноры</h1>
+
+        <p class="hero-text">
+            Здесь собраны подарки, которым я буду очень рада.
+            Выбирай то, что тебе понравится, и приходи праздновать со мной.
+        </p>
+
+        <div class="countdown">
+            <div class="time-box">
+                <span class="time-number" id="days">0</span>
+                <span class="time-label">дней</span>
+            </div>
+
+            <div class="time-box">
+                <span class="time-number" id="hours">0</span>
+                <span class="time-label">часов</span>
+            </div>
+
+            <div class="time-box">
+                <span class="time-number" id="minutes">0</span>
+                <span class="time-label">минут</span>
+            </div>
+
+            <div class="time-box">
+                <span class="time-number" id="seconds">0</span>
+                <span class="time-label">секунд</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="database-status" id="databaseStatus">
+            Подключение к общей базе подарков...
+        </div>
+
+        <div class="toolbar">
+            <input
+                class="search"
+                id="search"
+                type="search"
+                placeholder="Найти подарок..."
+                aria-label="Найти подарок"
+            >
+
+            <select
+                class="category-select"
+                id="category"
+                aria-label="Категория подарка"
+            >
+                <option value="all">Все категории</option>
+                <option value="Красота">Красота</option>
+                <option value="Одежда">Одежда</option>
+                <option value="Аксессуары">Аксессуары</option>
+                <option value="Творчество">Творчество</option>
+                <option value="Для дома">Для дома</option>
+                <option value="Техника">Техника</option>
+            </select>
+        </div>
+
+        <div class="summary">
+            <h2>Мои желания</h2>
+            <span class="counter" id="counter"></span>
+        </div>
+
+        <section class="grid" id="wishlist"></section>
+
+        <div class="empty" id="empty">
+            Ничего не найдено. Попробуйте изменить запрос.
+        </div>
+    </main>
+
+    <footer>
+        Сделано с любовью для <strong>Элеоноры</strong><br>
+        День рождения: 24 октября 2026 года
+    </footer>
+
+    <div class="toast" id="toast"></div>
+
+    <script type="module">
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+
+        import {
+            getAuth,
+            signInAnonymously
+        } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+        import {
+            getFirestore,
+            collection,
+            doc,
+            onSnapshot,
+            runTransaction,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA7TYmz2Y49-2d8t6EvzkLDbrYUdyiIexE",
+            authDomain: "eleonora-wishlist-ac97b.firebaseapp.com",
+            projectId: "eleonora-wishlist-ac97b",
+            storageBucket: "eleonora-wishlist-ac97b.firebasestorage.app",
+            messagingSenderId: "1081644702727",
+            appId: "1:1081644702727:web:417b4a3ab67762ff7d9ea2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const gifts = [
+            {
+                id: 1,
+                name: "STANLEY Термокружка, многоразовый стакан 1,18 л",
+                category: "Аксессуары",
+                emoji: "🥤",
+                link: "https://www.wildberries.ru/catalog/355139582/detail.aspx?size=523733972"
+            },
+            {
+                id: 2,
+                name: "Набор Grasp: 48 акриловых маркеров",
+                category: "Творчество",
+                emoji: "🖍️",
+                link: "https://www.wildberries.ru/catalog/822175308/detail.aspx?size=1231797845"
+            },
+            {
+                id: 3,
+                name: "MIXIT Блеск для губ с обвесом",
+                category: "Красота",
+                emoji: "💄",
+                link: "https://www.wildberries.ru/catalog/1434574958/detail.aspx?size=2144276445"
+            },
+            {
+                id: 4,
+                name: "KESHFIX Резинки для волос пружинки",
+                category: "Аксессуары",
+                emoji: "🎀",
+                link: "https://www.wildberries.ru/catalog/781341730/detail.aspx?size=1150535564"
+            },
+            {
+                id: 5,
+                name: "MIXIT Зубная паста-гель для зубов и языка",
+                category: "Красота",
+                emoji: "🫧",
+                link: "https://www.wildberries.ru/catalog/728749223/detail.aspx?size=1029556794"
+            },
+            {
+                id: 6,
+                name: "MIXIT Набор: тушь для ресниц и масло для губ",
+                category: "Красота",
+                emoji: "🖤",
+                link: "https://www.wildberries.ru/catalog/1163861300/detail.aspx?size=1718368707"
+            },
+            {
+                id: 7,
+                name: "nice at home Корзина для хранения мелочей",
+                category: "Для дома",
+                emoji: "🧺",
+                link: "https://www.wildberries.ru/catalog/182410504/detail.aspx?size=300888943"
+            },
+            {
+                id: 8,
+                name: "SOL DE JANEIRO Парфюмерный мист в стиле 39",
+                category: "Красота",
+                emoji: "🌸",
+                link: "https://www.wildberries.ru/catalog/483080944/detail.aspx?size=674416786"
+            },
+            {
+                id: 9,
+                name: "HairBee Заколки для волос косточки",
+                category: "Аксессуары",
+                emoji: "🦴",
+                link: "https://www.wildberries.ru/catalog/306630695/detail.aspx?size=464949683"
+            },
+            {
+                id: 10,
+                name: "Липучка для телефона, присоска-липпер",
+                category: "Аксессуары",
+                emoji: "📱",
+                link: "https://www.wildberries.ru/catalog/391074870/detail.aspx?size=566948549"
+            },
+            {
+                id: 11,
+                name: "Коричневый Y2K пенал в горошек",
+                category: "Аксессуары",
+                emoji: "✏️",
+                link: "https://www.wildberries.ru/catalog/1228063461/detail.aspx?size=1806626496"
+            },
+            {
+                id: 12,
+                name: "GoodM_art Сумка для тетрадей и альбомов",
+                category: "Аксессуары",
+                emoji: "👜",
+                link: "https://www.wildberries.ru/catalog/1308341043/detail.aspx?size=1934441572"
+            },
+            {
+                id: 13,
+                name: "Aksdom Беспроводной петличный микрофон",
+                category: "Техника",
+                emoji: "🎙️",
+                link: "https://www.wildberries.ru/catalog/444481160/detail.aspx?size=628711344"
+            },
+            {
+                id: 14,
+                name: "VIVIENNE SABO Палетка румян Naturel, оттенок 03",
+                category: "Красота",
+                emoji: "🌷",
+                link: "https://www.wildberries.ru/catalog/111449525/detail.aspx?size=201839298"
+            },
+            {
+                id: 15,
+                name: "VIVIENNE SABO Палетка хайлайтеров Gloire d'amour",
+                category: "Красота",
+                emoji: "✨",
+                link: "https://www.wildberries.ru/catalog/111449530/detail.aspx?size=201839303"
+            },
+            {
+                id: 16,
+                name: "Tishka Оверсайз зип-худи Polka Dot, вариант 1",
+                category: "Одежда",
+                emoji: "🧥",
+                link: "https://www.wildberries.ru/catalog/977947251/detail.aspx?size=1464854111"
+            },
+            {
+                id: 17,
+                name: "Tishka Обтягивающие штаны клёш с принтом сакура",
+                category: "Одежда",
+                emoji: "👖",
+                link: "https://www.wildberries.ru/catalog/1021704328/detail.aspx?size=1524162922"
+            },
+            {
+                id: 18,
+                name: "ORGVSM Оверсайз-футболка с принтом",
+                category: "Одежда",
+                emoji: "👕",
+                link: "https://www.wildberries.ru/catalog/485408652/detail.aspx?size=677084153"
+            },
+            {
+                id: 19,
+                name: "TEENCHIC Спортивные Y2K штаны со звёздами",
+                category: "Одежда",
+                emoji: "⭐",
+                link: "https://www.wildberries.ru/catalog/1458849785/detail.aspx?size=2181147148"
+            },
+            {
+                id: 20,
+                name: "Tishka Оверсайз зип-худи Polka Dot, вариант 2",
+                category: "Одежда",
+                emoji: "💗",
+                link: "https://www.wildberries.ru/catalog/977947251/detail.aspx?size=1464854109"
+            },
+            {
+                id: 21,
+                name: "Tishka Базовая облегающая майка",
+                category: "Одежда",
+                emoji: "🎽",
+                link: "https://www.wildberries.ru/catalog/940775776/detail.aspx?size=1416264833"
+            },
+            {
+                id: 22,
+                name: "Tishka Обтягивающая футболка Polka Dot",
+                category: "Одежда",
+                emoji: "🤎",
+                link: "https://www.wildberries.ru/catalog/940791385/detail.aspx?size=1416281702"
+            },
+            {
+                id: 23,
+                name: "ПиктурКейс Чехол на iPhone 17 с принтом",
+                category: "Аксессуары",
+                emoji: "📲",
+                link: "https://www.wildberries.ru/catalog/903368905/detail.aspx?size=1366142616"
+            }
+        ];
+
+        const colors = [
+            ["#ffd3e3", "#fff0a8"],
+            ["#e5d5ff", "#ffd8eb"],
+            ["#ccefff", "#eee1ff"],
+            ["#ffe2ce", "#ffd0e7"],
+            ["#d7f7e7", "#fff0bd"],
+            ["#fbcde4", "#ded2ff"]
+        ];
+
+        const wishlist = document.getElementById("wishlist");
+        const search = document.getElementById("search");
+        const category = document.getElementById("category");
+        const counter = document.getElementById("counter");
+        const empty = document.getElementById("empty");
+        const toast = document.getElementById("toast");
+        const databaseStatus = document.getElementById("databaseStatus");
+
+        let currentUser = null;
+        let reservations = new Map();
+        let databaseConnected = false;
+        let toastTimer;
+
+        function escapeHtml(value) {
+            return value
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+        }
+
+        function isReserved(id) {
+            return reservations.has(id);
+        }
+
+        function isReservedByCurrentUser(id) {
+            const reservation = reservations.get(id);
+
+            return Boolean(
+                reservation &&
+                currentUser &&
+                reservation.userId === currentUser.uid
+            );
+        }
+
+        function renderGifts() {
+            const query = search.value.trim().toLowerCase();
+            const selectedCategory = category.value;
+
+            const filtered = gifts.filter((gift) => {
+                const matchesSearch = gift.name.toLowerCase().includes(query);
+                const matchesCategory =
+                    selectedCategory === "all" ||
+                    gift.category === selectedCategory;
+
+                return matchesSearch && matchesCategory;
+            });
+
+            wishlist.innerHTML = filtered.map((gift) => {
+                const color = colors[(gift.id - 1) % colors.length];
+                const booked = isReserved(gift.id);
+                const bookedByMe = isReservedByCurrentUser(gift.id);
+                const bookedByOther = booked && !bookedByMe;
+
+                let buttonText = "Я подарю";
+
+                if (bookedByMe) {
+                    buttonText = "Отменить";
+                }
+
+                if (bookedByOther) {
+                    buttonText = "Уже выбрано";
+                }
+
+                let badge = "";
+
+                if (bookedByMe) {
+                    badge = `
+                        <span class="badge reserved-badge">
+                            Вы выбрали
+                        </span>
+                    `;
+                } else if (bookedByOther) {
+                    badge = `
+                        <span class="badge reserved-badge">
+                            Уже выбрано
+                        </span>
+                    `;
+                }
+
+                return `
+                    <article
+                        class="card ${bookedByOther ? "reserved-by-other" : ""}"
+                        style="--card-a: ${color[0]}; --card-b: ${color[1]};"
+                    >
+                        <div class="visual">
+                            <span class="badge category-badge">
+                                ${escapeHtml(gift.category)}
+                            </span>
+
+                            ${badge}
+
+                            <span class="emoji" aria-hidden="true">
+                                ${gift.emoji}
+                            </span>
+                        </div>
+
+                        <div class="card-content">
+                            <h3 class="card-title">
+                                ${escapeHtml(gift.name)}
+                            </h3>
+
+                            <p class="card-note">
+                                Подарок из моего списка желаний
+                            </p>
+
+                            <div class="actions">
+                                <a
+                                    class="button shop-button"
+                                    href="${gift.link}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Посмотреть
+                                </a>
+
+                                <button
+                                    class="button reserve-button"
+                                    type="button"
+                                    data-gift-id="${gift.id}"
+                                    ${bookedByOther || !databaseConnected ? "disabled" : ""}
+                                >
+                                    ${buttonText}
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join("");
+
+            counter.textContent = `${filtered.length} из ${gifts.length}`;
+            empty.style.display = filtered.length ? "none" : "block";
+
+            document.querySelectorAll("[data-gift-id]").forEach((button) => {
+                button.addEventListener("click", () => {
+                    toggleReserve(Number(button.dataset.giftId));
+                });
+            });
+        }
+
+        async function toggleReserve(id) {
+            if (!currentUser || !databaseConnected) {
+                showToast("Подождите подключения к базе данных");
+                return;
+            }
+
+            const gift = gifts.find((item) => item.id === id);
+            const reservationReference = doc(
+                db,
+                "reservations",
+                String(id)
+            );
+
+            const wasReservedByMe = isReservedByCurrentUser(id);
+
+            try {
+                await runTransaction(db, async (transaction) => {
+                    const snapshot = await transaction.get(
+                        reservationReference
+                    );
+
+                    if (snapshot.exists()) {
+                        const reservation = snapshot.data();
+
+                        if (reservation.userId !== currentUser.uid) {
+                            throw new Error(
+                                "Этот подарок уже выбрал другой гость"
+                            );
+                        }
+
+                        transaction.delete(reservationReference);
+                        return;
+                    }
+
+                    transaction.set(reservationReference, {
+                        userId: currentUser.uid,
+                        createdAt: serverTimestamp()
+                    });
+                });
+
+                if (wasReservedByMe) {
+                    showToast("Бронирование отменено");
+                } else {
+                    showToast(`Вы выбрали: ${gift.name}`);
+                }
+            } catch (error) {
+                console.error(error);
+
+                showToast(
+                    error.message ||
+                    "Не удалось изменить бронирование"
+                );
+            }
+        }
+
+        function showToast(message) {
+            clearTimeout(toastTimer);
+            toast.textContent = message;
+            toast.classList.add("show");
+
+            toastTimer = setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3500);
+        }
+
+        function setDatabaseStatus(type, message) {
+            databaseStatus.className = "database-status";
+
+            if (type) {
+                databaseStatus.classList.add(type);
+            }
+
+            databaseStatus.textContent = message;
+        }
+
+        async function connectToFirebase() {
+            try {
+                const userCredential = await signInAnonymously(auth);
+                currentUser = userCredential.user;
+
+                onSnapshot(
+                    collection(db, "reservations"),
+                    (snapshot) => {
+                        reservations = new Map();
+
+                        snapshot.forEach((reservationDocument) => {
+                            reservations.set(
+                                Number(reservationDocument.id),
+                                reservationDocument.data()
+                            );
+                        });
+
+                        databaseConnected = true;
+
+                        setDatabaseStatus(
+                            "connected",
+                            "Бронирования синхронизированы"
+                        );
+
+                        renderGifts();
+                    },
+                    (error) => {
+                        console.error(error);
+                        databaseConnected = false;
+
+                        setDatabaseStatus(
+                            "error",
+                            "Не удалось загрузить бронирования"
+                        );
+
+                        renderGifts();
+                    }
+                );
+            } catch (error) {
+                console.error(error);
+                databaseConnected = false;
+
+                setDatabaseStatus(
+                    "error",
+                    "Не удалось подключиться к Firebase"
+                );
+
+                renderGifts();
+            }
+        }
+
+        function updateCountdown() {
+            const birthday = new Date("2026-10-24T00:00:00");
+            const difference = birthday.getTime() - Date.now();
+
+            if (difference <= 0) {
+                document.getElementById("days").textContent = "0";
+                document.getElementById("hours").textContent = "00";
+                document.getElementById("minutes").textContent = "00";
+                document.getElementById("seconds").textContent = "00";
+                return;
+            }
+
+            const days = Math.floor(difference / 86400000);
+            const hours = Math.floor((difference / 3600000) % 24);
+            const minutes = Math.floor((difference / 60000) % 60);
+            const seconds = Math.floor((difference / 1000) % 60);
+
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent =
+                String(hours).padStart(2, "0");
+            document.getElementById("minutes").textContent =
+                String(minutes).padStart(2, "0");
+            document.getElementById("seconds").textContent =
+                String(seconds).padStart(2, "0");
+        }
+
+        search.addEventListener("input", renderGifts);
+        category.addEventListener("change", renderGifts);
+
+        renderGifts();
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        connectToFirebase();
+    </script>
+</body>
+</html>
