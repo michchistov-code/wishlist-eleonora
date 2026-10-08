@@ -77,6 +77,76 @@
             line-height: 1.6;
         }
 
+        .invitation {
+    max-width: 720px;
+    margin: 30px auto 0;
+    padding: 26px;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.88);
+    border: 2px solid rgba(255, 112, 170, 0.25);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(15px);
+}
+
+.invitation-title {
+    margin: 0 0 16px;
+    color: var(--dark-pink);
+    font-size: 25px;
+    text-align: center;
+}
+
+.invitation-text {
+    margin: 0 0 20px;
+    font-size: 17px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.invitation-details {
+    display: grid;
+    gap: 12px;
+}
+
+.invitation-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    background: #fff6fa;
+    border: 1px solid #f4d2e1;
+    border-radius: 17px;
+}
+
+.invitation-icon {
+    flex: 0 0 auto;
+    font-size: 23px;
+}
+
+.invitation-information {
+    line-height: 1.5;
+}
+
+.invitation-information strong {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--dark-pink);
+}
+
+@media (max-width: 620px) {
+    .invitation {
+        padding: 20px;
+        border-radius: 23px;
+    }
+
+    .invitation-title {
+        font-size: 22px;
+    }
+
+    .invitation-text {
+        font-size: 16px;
+    }
+}
         .countdown {
             display: grid;
             grid-template-columns: repeat(4, minmax(70px, 120px));
@@ -418,11 +488,49 @@
         <h1>Вишлист Элеоноры</h1>
 
         <p class="hero-text">
-            Здесь собраны подарки, которым я буду очень рада.
-            Выбирай то, что тебе понравится, и приходи праздновать со мной.
-        </p>
+    Здесь собраны подарки, которым я буду очень рада.
+    Выбирай то, что тебе понравится, и приходи праздновать со мной.
+</p>
 
-        <div class="countdown">
+<section class="invitation">
+    <h2 class="invitation-title">Дорогие друзья!</h2>
+
+    <p class="invitation-text">
+        Приглашаем вас на празднование 10-летия Элеоноры!
+    </p>
+
+    <div class="invitation-details">
+        <div class="invitation-item">
+            <span class="invitation-icon" aria-hidden="true">📅</span>
+
+            <div class="invitation-information">
+                <strong>Дата</strong>
+                24 октября 2026 года
+            </div>
+        </div>
+
+        <div class="invitation-item">
+            <span class="invitation-icon" aria-hidden="true">🕔</span>
+
+            <div class="invitation-information">
+                <strong>Время</strong>
+                С 17:00 до 22:00
+            </div>
+        </div>
+
+        <div class="invitation-item">
+            <span class="invitation-icon" aria-hidden="true">📍</span>
+
+            <div class="invitation-information">
+                <strong>Место проведения</strong>
+                «Дрепин Лофт», г. Зеленоград,<br>
+                Центральный проспект, корпус 438
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="countdown">
             <div class="time-box">
                 <span class="time-number" id="days">0</span>
                 <span class="time-label">дней</span>
