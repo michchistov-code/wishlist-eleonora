@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ect<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
         :root {
             --pink: #ff70aa;
             --dark-pink: #d94d8a;
-            --light-pink: #ffe3ef;
+      ion      --light-pink: #ffe3ef;
             --text: #542d47;
             --white: #ffffff;
             --shadow: 0 14px 35px rgba(188, 73, 132, 0.16);
@@ -518,6 +518,284 @@
         height: 260px;
     }
 }
+   .envelope-invitation {
+    width: min(720px, 100%);
+    margin: 35px auto 0;
+}
+
+.envelope-invitation summary {
+    list-style: none;
+}
+
+.envelope-invitation summary::-webkit-details-marker {
+    display: none;
+}
+
+.envelope {
+    position: relative;
+    display: flex;
+    min-height: 310px;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    padding: 35px 25px;
+    background:
+        linear-gradient(
+            150deg,
+            transparent 49.5%,
+            rgba(255, 255, 255, 0.33) 50%
+        ),
+        linear-gradient(
+            210deg,
+            transparent 49.5%,
+            rgba(255, 255, 255, 0.25) 50%
+        ),
+        linear-gradient(135deg, #ffb8d3, #f58fbd);
+    border: 3px solid rgba(255, 255, 255, 0.75);
+    border-radius: 30px;
+    box-shadow: 0 22px 50px rgba(188, 73, 132, 0.25);
+    cursor: pointer;
+    user-select: none;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.envelope:hover {
+    transform: translateY(-5px) rotate(-0.4deg);
+    box-shadow: 0 28px 55px rgba(188, 73, 132, 0.32);
+}
+
+.envelope-flap {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 62%;
+    background: linear-gradient(145deg, #ffd6e6, #f79fc4);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top;
+    transition: transform 0.6s ease;
+}
+
+.envelope-invitation[open] .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+.envelope-heart {
+    position: absolute;
+    z-index: 3;
+    top: 43%;
+    left: 50%;
+    display: grid;
+    width: 76px;
+    height: 76px;
+    place-items: center;
+    font-size: 45px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 10px 25px rgba(148, 54, 101, 0.22);
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease;
+}
+
+.envelope:hover .envelope-heart {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.envelope-caption {
+    position: relative;
+    z-index: 4;
+    display: block;
+    padding: 13px 20px;
+    color: #713650;
+    font-size: 15px;
+    line-height: 1.5;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(121, 44, 84, 0.14);
+}
+
+.envelope-caption strong {
+    display: block;
+    color: var(--dark-pink);
+    font-size: 21px;
+}
+
+.envelope-invitation[open] .envelope-caption {
+    display: none;
+}
+
+.invitation-letter {
+    position: relative;
+    margin: 18px auto 0;
+    padding: 35px;
+    overflow: hidden;
+    text-align: center;
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(255, 212, 231, 0.7),
+            transparent 24%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(224, 208, 255, 0.7),
+            transparent 25%
+        ),
+        #ffffff;
+    border: 2px solid #f4c8dc;
+    border-radius: 30px;
+    box-shadow: 0 22px 50px rgba(188, 73, 132, 0.2);
+    animation: openLetter 0.55s ease;
+}
+
+@keyframes openLetter {
+    from {
+        opacity: 0;
+        transform: translateY(-35px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.letter-decoration {
+    margin-bottom: 10px;
+    font-size: 27px;
+    letter-spacing: 8px;
+}
+
+.letter-small-title {
+    margin: 0 0 8px;
+    color: #9a6a82;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.birthday-number {
+    color: var(--dark-pink);
+    font-size: 86px;
+    font-weight: 900;
+    line-height: 1;
+    text-shadow:
+        3px 3px 0 #ffd2e4,
+        6px 6px 0 #f3e2ff;
+}
+
+.letter-title {
+    margin: 5px 0 20px;
+    color: var(--dark-pink);
+    font-size: clamp(29px, 6vw, 43px);
+}
+
+.letter-text {
+    max-width: 570px;
+    margin: 12px auto;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.letter-details {
+    display: grid;
+    gap: 12px;
+    margin-top: 25px;
+    text-align: left;
+}
+
+.letter-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 15px 17px;
+    background: rgba(255, 246, 250, 0.92);
+    border: 1px solid #f3d1df;
+    border-radius: 18px;
+}
+
+.letter-icon {
+    flex: 0 0 auto;
+    font-size: 25px;
+}
+
+.letter-item strong,
+.letter-item span {
+    display: block;
+}
+
+.letter-item strong {
+    margin-bottom: 4px;
+    color: var(--dark-pink);
+}
+
+.letter-item span {
+    line-height: 1.5;
+}
+
+.letter-route-button {
+    display: flex;
+    min-height: 52px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 12px 18px;
+    color: #ffffff;
+    font-weight: 800;
+    text-decoration: none;
+    background: linear-gradient(
+        135deg,
+        var(--pink),
+        var(--dark-pink)
+    );
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(217, 77, 138, 0.22);
+    transition: transform 0.2s ease;
+}
+
+.letter-route-button:hover {
+    transform: translateY(-2px);
+}
+
+.letter-signature {
+    margin: 25px 0 0;
+    color: var(--dark-pink);
+    font-size: 19px;
+    font-weight: 800;
+}
+
+@media (max-width: 620px) {
+    .envelope {
+        min-height: 250px;
+        padding: 25px 18px;
+        border-radius: 24px;
+    }
+
+    .envelope-heart {
+        width: 64px;
+        height: 64px;
+        font-size: 37px;
+    }
+
+    .invitation-letter {
+        padding: 27px 20px;
+        border-radius: 24px;
+    }
+
+    .birthday-number {
+        font-size: 70px;
+    }
+
+    .letter-text {
+        font-size: 16px;
+    }
+}
     </style>
 </head>
 
@@ -533,59 +811,82 @@
 </p>
 
 <section class="invitation">
-    <h2 class="invitation-title">Дорогие друзья!</h2>
+   <details class="envelope-invitation">
+    <summary class="envelope">
+        <span class="envelope-flap"></span>
 
-    <p class="invitation-text">
-        Приглашаем вас на празднование 10-летия Элеоноры!
-    </p>
+        <span class="envelope-heart" aria-hidden="true">💗</span>
 
-    <div class="invitation-details">
-        <div class="invitation-item">
-            <span class="invitation-icon" aria-hidden="true">📅</span>
+        <span class="envelope-caption">
+            <strong>Для тебя!</strong>
+            Нажми, чтобы открыть приглашение
+        </span>
+    </summary>
 
-            <div class="invitation-information">
-                <strong>Дата</strong>
-                24 октября 2026 года
+    <section class="invitation-letter">
+        <div class="letter-decoration" aria-hidden="true">✨ 🎀 ✨</div>
+
+        <p class="letter-small-title">Приглашение на день рождения</p>
+
+        <div class="birthday-number">10</div>
+
+        <h2 class="letter-title">Элеоноре 10 лет!</h2>
+
+        <p class="letter-text">
+            Дорогие друзья!
+        </p>
+
+        <p class="letter-text">
+            Приглашаем вас на празднование дня рождения Элеоноры.
+            Будем очень рады провести этот замечательный вечер вместе!
+        </p>
+
+        <div class="letter-details">
+            <div class="letter-item">
+                <span class="letter-icon" aria-hidden="true">📅</span>
+
+                <div>
+                    <strong>Дата</strong>
+                    <span>24 октября 2026 года</span>
+                </div>
+            </div>
+
+            <div class="letter-item">
+                <span class="letter-icon" aria-hidden="true">🕔</span>
+
+                <div>
+                    <strong>Время</strong>
+                    <span>С 17:00 до 22:00</span>
+                </div>
+            </div>
+
+            <div class="letter-item">
+                <span class="letter-icon" aria-hidden="true">📍</span>
+
+                <div>
+                    <strong>Место проведения</strong>
+                    <span>
+                        «Дрепин Лофт», г. Зеленоград,<br>
+                        Центральный проспект, корпус 438
+                    </span>
+                </div>
             </div>
         </div>
 
-        <div class="invitation-item">
-            <span class="invitation-icon" aria-hidden="true">🕔</span>
+        <a
+            class="letter-route-button"
+            href="https://yandex.ru/maps/?text=%D0%97%D0%B5%D0%BB%D0%B5%D0%BD%D0%BE%D0%B3%D1%80%D0%B0%D0%B4%2C%20%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%2C%20%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81%20438"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Открыть карту
+        </a>
 
-            <div class="invitation-information">
-                <strong>Время</strong>
-                С 17:00 до 22:00
-            </div>
-        </div>
-
-        <div class="invitation-item">
-            <span class="invitation-icon" aria-hidden="true">📍</span>
-
-            <div class="invitation-information">
-                <strong>Место проведения</strong>
-                «Дрепин Лофт», г. Зеленоград,<br>
-                Центральный проспект, корпус 438
-            </div>
-        </div>
-    </div>
-<div class="location-map">
-    <iframe
-        src="https://yandex.ru/map-widget/v1/?text=%D0%97%D0%B5%D0%BB%D0%B5%D0%BD%D0%BE%D0%B3%D1%80%D0%B0%D0%B4%2C%20%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%2C%20%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81%20438&z=16"
-        title="Дрепин Лофт на карте"
-        loading="lazy"
-        allowfullscreen
-    ></iframe>
-
-    <a
-        class="route-button"
-        href="https://yandex.ru/maps/?text=%D0%97%D0%B5%D0%BB%D0%B5%D0%BD%D0%BE%D0%B3%D1%80%D0%B0%D0%B4%2C%20%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%2C%20%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81%20438"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        Открыть карту и построить маршрут
-    </a>
-</div>
-</section>
+        <p class="letter-signature">
+            Ждём тебя на празднике! 💕
+        </p>
+    </section>
+</details>
 
 <div class="countdown">
             <div class="time-box">
