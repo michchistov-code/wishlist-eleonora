@@ -992,168 +992,140 @@
         const db = getFirestore(app);
 
         const gifts = [
-            {
-                id: 1,
-                name: "STANLEY Термокружка, многоразовый стакан 1,18 л",
-                category: "Аксессуары",
-                emoji: "🥤",
-                link: "https://www.wildberries.ru/catalog/355139582/detail.aspx?size=523733972"
-            },
-            {
-                id: 2,
-                name: "Набор Grasp: 48 акриловых маркеров",
-                category: "Творчество",
-                emoji: "🖍️",
-                link: "https://www.wildberries.ru/catalog/822175308/detail.aspx?size=1231797845"
-            },
-            {
-                id: 3,
-                name: "MIXIT Блеск для губ с обвесом",
-                category: "Красота",
-                emoji: "💄",
-                link: "https://www.wildberries.ru/catalog/1434574958/detail.aspx?size=2144276445"
-            },
-            {
-                id: 4,
-                name: "KESHFIX Резинки для волос пружинки",
-                category: "Аксессуары",
-                emoji: "🎀",
-                link: "https://www.wildberries.ru/catalog/781341730/detail.aspx?size=1150535564"
-            },
-            {
-                id: 5,
-                name: "MIXIT Зубная паста-гель для зубов и языка",
-                category: "Красота",
-                emoji: "🫧",
-                link: "https://www.wildberries.ru/catalog/728749223/detail.aspx?size=1029556794"
-            },
-            {
-                id: 6,
-                name: "MIXIT Набор: тушь для ресниц и масло для губ",
-                category: "Красота",
-                emoji: "🖤",
-                link: "https://www.wildberries.ru/catalog/1163861300/detail.aspx?size=1718368707"
-            },
-            {
-                id: 7,
-                name: "nice at home Корзина для хранения мелочей",
-                category: "Для дома",
-                emoji: "🧺",
-                link: "https://www.wildberries.ru/catalog/182410504/detail.aspx?size=300888943"
-            },
-            {
-                id: 8,
-                name: "SOL DE JANEIRO Парфюмерный мист в стиле 39",
-                category: "Красота",
-                emoji: "🌸",
-                link: "https://www.wildberries.ru/catalog/483080944/detail.aspx?size=674416786"
-            },
-            {
-                id: 9,
-                name: "HairBee Заколки для волос косточки",
-                category: "Аксессуары",
-                emoji: "🦴",
-                link: "https://www.wildberries.ru/catalog/306630695/detail.aspx?size=464949683"
-            },
-            {
-                id: 10,
-                name: "Липучка для телефона, присоска-липпер",
-                category: "Аксессуары",
-                emoji: "📱",
-                link: "https://www.wildberries.ru/catalog/391074870/detail.aspx?size=566948549"
-            },
-            {
-                id: 11,
-                name: "Коричневый Y2K пенал в горошек",
-                category: "Аксессуары",
-                emoji: "✏️",
-                link: "https://www.wildberries.ru/catalog/1228063461/detail.aspx?size=1806626496"
-            },
-            {
-                id: 12,
-                name: "GoodM_art Сумка для тетрадей и альбомов",
-                category: "Аксессуары",
-                emoji: "👜",
-                link: "https://www.wildberries.ru/catalog/1308341043/detail.aspx?size=1934441572"
-            },
-            {
-                id: 13,
-                name: "Aksdom Беспроводной петличный микрофон",
-                category: "Техника",
-                emoji: "🎙️",
-                link: "https://www.wildberries.ru/catalog/444481160/detail.aspx?size=628711344"
-            },
-            {
-                id: 14,
-                name: "VIVIENNE SABO Палетка румян Naturel, оттенок 03",
-                category: "Красота",
-                emoji: "🌷",
-                link: "https://www.wildberries.ru/catalog/111449525/detail.aspx?size=201839298"
-            },
-            {
-                id: 15,
-                name: "VIVIENNE SABO Палетка хайлайтеров Gloire d'amour",
-                category: "Красота",
-                emoji: "✨",
-                link: "https://www.wildberries.ru/catalog/111449530/detail.aspx?size=201839303"
-            },
-            {
-                id: 16,
-                name: "Tishka Оверсайз зип-худи Polka Dot, вариант 1",
-                category: "Одежда",
-                emoji: "🧥",
-                link: "https://www.wildberries.ru/catalog/977947251/detail.aspx?size=1464854111"
-            },
-            {
-                id: 17,
-                name: "Tishka Обтягивающие штаны клёш с принтом сакура",
-                category: "Одежда",
-                emoji: "👖",
-                link: "https://www.wildberries.ru/catalog/1021704328/detail.aspx?size=1524162922"
-            },
-            {
-                id: 18,
-                name: "ORGVSM Оверсайз-футболка с принтом",
-                category: "Одежда",
-                emoji: "👕",
-                link: "https://www.wildberries.ru/catalog/485408652/detail.aspx?size=677084153"
-            },
-            {
-                id: 19,
-                name: "TEENCHIC Спортивные Y2K штаны со звёздами",
-                category: "Одежда",
-                emoji: "⭐",
-                link: "https://www.wildberries.ru/catalog/1458849785/detail.aspx?size=2181147148"
-            },
-            {
-                id: 20,
-                name: "Tishka Оверсайз зип-худи Polka Dot, вариант 2",
-                category: "Одежда",
-                emoji: "💗",
-                link: "https://www.wildberries.ru/catalog/977947251/detail.aspx?size=1464854109"
-            },
-            {
-                id: 21,
-                name: "Tishka Базовая облегающая майка",
-                category: "Одежда",
-                emoji: "🎽",
-                link: "https://www.wildberries.ru/catalog/940775776/detail.aspx?size=1416264833"
-            },
-            {
-                id: 22,
-                name: "Tishka Обтягивающая футболка Polka Dot",
-                category: "Одежда",
-                emoji: "🤎",
-                link: "https://www.wildberries.ru/catalog/940791385/detail.aspx?size=1416281702"
-            },
-            {
-                id: 23,
-                name: "ПиктурКейс Чехол на iPhone 17 с принтом",
-                category: "Аксессуары",
-                emoji: "📲",
-                link: "https://www.wildberries.ru/catalog/903368905/detail.aspx?size=1366142616"
-            }
-        ];
+    {
+        id: 2,
+        name: "Набор Grasp: 48 акриловых маркеров для скетчинга",
+        category: "Творчество",
+        emoji: "🖍️",
+        link: "https://www.wildberries.ru/catalog/822175308/detail.aspx?size=1231797845"
+    },
+    {
+        id: 3,
+        name: "MIXIT Блеск для губ с обвесом",
+        category: "Красота",
+        emoji: "💄",
+        link: "https://www.wildberries.ru/catalog/1434574958/detail.aspx?size=2144276445"
+    },
+    {
+        id: 4,
+        name: "KESHFIX Резинки для волос пружинки, набор",
+        category: "Аксессуары",
+        emoji: "🎀",
+        link: "https://www.wildberries.ru/catalog/781341730/detail.aspx?size=1150535564"
+    },
+    {
+        id: 5,
+        name: "MIXIT Зубная паста-гель для зубов и языка",
+        category: "Красота",
+        emoji: "🫧",
+        link: "https://www.wildberries.ru/catalog/728749223/detail.aspx?size=1029556794"
+    },
+    {
+        id: 6,
+        name: "MIXIT Набор: удлиняющая тушь для ресниц и масло для губ",
+        category: "Красота",
+        emoji: "🖤",
+        link: "https://www.wildberries.ru/catalog/1163861300/detail.aspx?size=1718368707"
+    },
+    {
+        id: 7,
+        name: "nice at home Корзина для хранения мелочей",
+        category: "Для дома",
+        emoji: "🧺",
+        link: "https://www.wildberries.ru/catalog/182410504/detail.aspx?size=300888943"
+    },
+    {
+        id: 8,
+        name: "SOL DE JANEIRO Парфюмерный мист в стиле 39",
+        category: "Красота",
+        emoji: "🌸",
+        link: "https://www.wildberries.ru/catalog/483080944/detail.aspx?size=674416786"
+    },
+    {
+        id: 9,
+        name: "HairBee Заколки для волос «косточки»",
+        category: "Аксессуары",
+        emoji: "🦴",
+        link: "https://www.wildberries.ru/catalog/306630695/detail.aspx?size=464949683"
+    },
+    {
+        id: 10,
+        name: "Липучка для телефона, присоска-липпер",
+        category: "Аксессуары",
+        emoji: "📱",
+        link: "https://www.wildberries.ru/catalog/391074870/detail.aspx?size=566948549"
+    },
+    {
+        id: 11,
+        name: "Коричневый Y2K пенал в горошек",
+        category: "Аксессуары",
+        emoji: "✏️",
+        link: "https://www.wildberries.ru/catalog/1228063461/detail.aspx?size=1806626496"
+    },
+    {
+        id: 12,
+        name: "GoodM_art Школьная сумка для тетрадей и альбомов",
+        category: "Аксессуары",
+        emoji: "👜",
+        link: "https://www.wildberries.ru/catalog/1308341043/detail.aspx?size=1934441572"
+    },
+    {
+        id: 13,
+        name: "Aksdom Беспроводной петличный микрофон для iPhone и Android",
+        category: "Техника",
+        emoji: "🎙️",
+        link: "https://www.wildberries.ru/catalog/444481160/detail.aspx?size=628711344"
+    },
+    {
+        id: 14,
+        name: "VIVIENNE SABO Палетка румян Naturel, 6 г, оттенок 03",
+        category: "Красота",
+        emoji: "🌷",
+        link: "https://www.wildberries.ru/catalog/111449525/detail.aspx?size=201839298"
+    },
+    {
+        id: 15,
+        name: "VIVIENNE SABO Палетка хайлайтеров Gloire d'amour, 6 г, оттенок 01",
+        category: "Красота",
+        emoji: "✨",
+        link: "https://www.wildberries.ru/catalog/111449530/detail.aspx?size=201839303"
+    },
+    {
+        id: 16,
+        name: "Tishka Оверсайз зип-худи Polka Dot",
+        category: "Одежда",
+        emoji: "🧥",
+        link: "https://www.wildberries.ru/catalog/977947251/detail.aspx?size=1464854111"
+    },
+    {
+        id: 18,
+        name: "ORGVSM Футболка оверсайз с принтом",
+        category: "Одежда",
+        emoji: "👕",
+        link: "https://www.wildberries.ru/catalog/485408652/detail.aspx?size=677084153"
+    },
+    {
+        id: 19,
+        name: "TEENCHIC Спортивные Y2K штаны со звёздами",
+        category: "Одежда",
+        emoji: "⭐",
+        link: "https://www.wildberries.ru/catalog/1458849785/detail.aspx?size=2181147148"
+    },
+    {
+        id: 21,
+        name: "Tishka Базовая облегающая майка на тонких бретелях",
+        category: "Одежда",
+        emoji: "🎽",
+        link: "https://www.wildberries.ru/catalog/940775776/detail.aspx?size=1416264833"
+    },
+    {
+        id: 23,
+        name: "ПиктурКейс Чехол на iPhone 17 с принтом",
+        category: "Аксессуары",
+        emoji: "📲",
+        link: "https://www.wildberries.ru/catalog/903368905/detail.aspx?size=1366142616"
+    }
+];
 
         const colors = [
             ["#ffd3e3", "#fff0a8"],
