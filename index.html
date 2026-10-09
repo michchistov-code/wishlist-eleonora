@@ -1267,7 +1267,11 @@
                 `;
             }).join("");
 
-            counter.textContent = `${filtered.length} из ${gifts.length}`;
+            const remainingGifts = gifts.filter((gift) => {
+    return !isReserved(gift.id);
+}).length;
+
+counter.textContent = `Осталось ${remainingGifts} из ${gifts.length}`;
             empty.style.display = filtered.length ? "none" : "block";
 
             document.querySelectorAll("[data-gift-id]").forEach((button) => {
